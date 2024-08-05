@@ -8,7 +8,10 @@ import { CONTACT } from "~/constants"
   <div class="text-3xl sm:text-5xl mb-2 font-semibold" once-in>
    Hey, I'm Mohammed
   </div>
-  <div class="text-3xl sm:text-5xl font-semibold" once-in>
+  <!--from-blue-600 to-rose-600 to -->
+  <div
+   class="text-3xl sm:text-5xl font-semibold bg-gradient-to-r from-purple-400 to-pink-600 inline-block text-transparent bg-clip-text"
+   once-in>
    Frontend Developer.
   </div>
   <!-- buttons -->
