@@ -1,6 +1,6 @@
 <script setup>
 const nuxtApp = useNuxtApp()
-const { __pageTransitionEnter__, __showElementOnScroll__, _animateLandingContent_ } = useGsap()
+const { __pageTransitionEnter__ } = useGsap()
 
 nuxtApp.hook("page:finish", () => {
   // TODO

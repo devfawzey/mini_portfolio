@@ -5,6 +5,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      title: "mofawzey",
       link: [
         {
           rel: "icon", href: "/favicon.svg", type: "image/svg+xml"
@@ -31,6 +32,6 @@ export default defineNuxtConfig({
     }
   },
   image: {
-    provider:"vercel"
+    // provider:"vercel"
   }
 })

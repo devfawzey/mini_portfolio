@@ -6,7 +6,7 @@ export const useGsap = () => {
  const tl = gsap.timeline();
  const targets = {
   loader: "main#loader",
-  landingImg: "#home-landing img.landing__img"
+  landingImg: ".bg-dots"
  }
 
  const __pageTransitionEnter__ = () => {
@@ -24,14 +24,13 @@ export const useGsap = () => {
   // })
   // loader
   tl.to(targets.loader, { yPercent: -100, ease: "expo.inOut", duration: 1.75, delay: 0.5, })
-  _animateLandingContent_()
   // img
-  // tl.to(targets.landingImg, {
-  //  scale: 1,
-  //  rotate: 0.001,
-  //  duration: 1.75,
-  //  ease: "expo.inOut"
-  // }, "<")
+  tl.to(targets.landingImg, {
+   scale: 1,
+   duration: 1.75,
+   ease: "expo.inOut"
+  }, "<")
+  _animateLandingContent_()
  }
  const __pageTransitionLeave__ = () => { }
  const ____zoomImgOnScroll____ = () => { }

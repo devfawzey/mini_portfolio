@@ -10,7 +10,7 @@ import { STACKS } from "~/constants"
   <div class="grid gap-3 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
    <!--  -->
    <div fade-scroll
-    class="box hover:bg-main/50 transition-colors cursor-pointer aspect-square bg-main rounded-lg p-3 capitalize flex items-center justify-center flex-col gap-3"
+    class="box hover:bg-main-foreground transition-colors cursor-pointer aspect-square bg-main rounded-lg p-3 capitalize flex items-center justify-center flex-col gap-3"
     v-for="tech in STACKS">
     <UIcon :name="tech.icon" class="text-4xl" />
     <div class="text-base" v-text="tech.title" />

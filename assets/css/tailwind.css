@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#1e1e1e] text-white;
+    @apply text-white bg-black;
   }
   [once-in] {
     @apply relative translate-y-[50vh];
@@ -17,13 +17,32 @@
   .appear {
     @apply opacity-100 translate-y-0;
   }
-  body::-webkit-scrollbar{
-    @apply w-2 bg-main
+  body::-webkit-scrollbar {
+    @apply w-2 bg-main;
   }
-  body::-webkit-scrollbar-thumb{
-    @apply bg-main-foreground rounded-xl
+  body::-webkit-scrollbar-thumb {
+    @apply bg-main-foreground rounded-xl;
   }
-  body::-webkit-scrollbar-track{
-    @apply bg-main
+  body::-webkit-scrollbar-track {
+    @apply bg-main;
   }
 }
+/* .bg-dots {
+  --dot-bg: black;
+  --dot-color: #515151;
+  --dot-size: 2px;
+  --dot-space: 40px;
+  background: linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+  @apply scale-[1.5];
+} */

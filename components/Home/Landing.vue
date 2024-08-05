@@ -13,7 +13,7 @@ import { CONTACT } from "~/constants"
   </div>
   <!-- buttons -->
 
-  <div class="btns_group my-8 flex flex-wrap gap-4 items-center justify-center sm:justify-start" once-in>
+  <div class="btns_group my-8 flex flex-wrap gap-2 items-center justify-center sm:justify-start" once-in>
    <a :href="btn.link" :target="btn.isMail ? '_self' : '_blank'" v-for="btn in CONTACT" class="link cursor-pointer transition-all hover:scale-110 capitalize hover:bg-white hover:text-black  bg-main px-8 py-3 rounded-full items-center gap-1
     inline-flex ">
     <UIcon :name="btn.icon" />
