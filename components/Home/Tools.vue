@@ -5,7 +5,7 @@ import { TOOLS } from "~/constants"
 </script>
 
 <template>
-  <section id='tech' class=''>
+  <section id='tools' class=''>
     <hr class="my-6 border-white/20" fade-scroll/>
     <div class="text-2xl mb-4" fade-scroll>Tools</div>
     <div class="grid gap-3 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">

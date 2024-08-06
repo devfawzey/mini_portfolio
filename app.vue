@@ -10,7 +10,6 @@ nuxtApp.hook("page:finish", () => {
 </script>
 
 <template>
-  <!-- <UButton @click="_animateLandingContent_">animate</UButton> -->
   <NuxtLayout>
     <BaseLoader />
     <NuxtPage />

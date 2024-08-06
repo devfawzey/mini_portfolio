@@ -13,7 +13,7 @@ export const CONTACT = [
   title: "mail",
   icon: "material-symbols-light:mail-outline",
   link: "mailto:devfawzey@gmail.com",
-  isMail:true,
+  isMail: true,
  },
 ]
 export const PROJECTS = [
@@ -57,7 +57,14 @@ export const PROJECTS = [
   "src": "innovate",
   "link": "https://innovate3.online/"
  },
-
+ {
+  title: "tabarak company",
+  type: "design",
+  grid: "xx-large",
+  techs: ['mdi:nuxt'],
+  src: "tabark",
+  link: "https://tabrak-pi.vercel.app/"
+ },
  {
   "title": "Hager UI-UX Developer",
   "type": "design",
@@ -244,5 +251,53 @@ export const TOOLS = [
  {
   title: "Figma",
   icon: "solar:figma-broken"
+ },
+]
+
+export const HEADERLINKS = [
+ {
+  title: "home-page",
+  icon: 'bi:grid'
+ },
+ {
+  title: "timeline",
+  icon: 'material-symbols:timeline'
+ },
+ {
+  title: "projects",
+  icon: "material-symbols-light:work-outline"
+ },
+ {
+  title: "techs",
+  icon: "hugeicons:nano-technology"
+ },
+ {
+  title: "tools",
+  icon: "ri:tools-line"
+ },
+]
+
+export const TIMELINE = [
+ {
+  date: "2022-08-01",
+  text: "Graduated in Computer Science"
+ },
+ {
+  date: "2023-02-01",
+  text: "First developer job as frontend developer",
+  isLeft: true
+ },
+ {
+  date: "2023-04-01",
+  text: "Working as a freelancer",
+ },
+ {
+  date: "2024-04-01",
+  text: "joined <a target='_blank' href='https://www.linkedin.com/company/talent-innovate/'>@innovate</a> as a frontend developer",
+  isLeft: true
+ },
+ {
+  date: "present",
+  text: "Self-Employed Frontend Developer"
  },
 ]

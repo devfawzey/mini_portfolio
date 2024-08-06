@@ -10,7 +10,7 @@ import { CONTACT } from "~/constants"
   </div>
   <!--from-blue-600 to-rose-600 to -->
   <div
-   class="text-3xl sm:text-5xl font-semibold bg-gradient-to-r from-purple-400 to-pink-600 inline-block text-transparent bg-clip-text"
+   class="text-3xl sm:text-5xl font-semibold bg-gradient-to-r from-indigo-600 to-pink-600 inline-block text-transparent bg-clip-text"
    once-in>
    Frontend Developer.
   </div>

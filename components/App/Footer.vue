@@ -7,7 +7,7 @@ function openPDF() {
 </script>
 
 <template>
- <footer id='footer' class='py-10'>
+ <footer id='footer' class='pb-32 lg:pb-10 pt-0'>
   <hr class="my-6 border-white/20" />
   <div class="text-2xl sm:text-4xl mb-4">Thanks for scrolling.</div>
   <UButton @click="openPDF" label="Resume" icon="radix-icons:arrow-top-right" :ui="{ rounded: 'rounded-full' }" size="lg"

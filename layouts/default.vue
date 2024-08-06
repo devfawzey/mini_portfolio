@@ -6,7 +6,7 @@
   </div> -->
   <div
    class="bg-dots scale-150 fixed top-0 left-0 inset-0 h-full w-full bg-black bg-[radial-gradient(#515151_1px,transparent_1px)] [background-size:40px_40px]" />
-  <BaseWrapper class="pt-28 max-w-2xl">
+  <BaseWrapper class="max-w-2xl">
    <slot />
    <AppFooter />
   </BaseWrapper>

@@ -25,27 +25,13 @@ import { PROJECTS } from "~/constants"
                 <UIcon v-for="tag in prjct.techs" :name="tag" class="text-2xl" />
               </div>
             </a>
-            <!-- img -->
-            <NuxtImg quality="60" :alt="prjct.title" placeholder-class="animate-pulse !w-full !h-full max-w-full"
-              format="webp" loading="lazy" placeholder :src="`/compressed/${prjct.src}.png`"
-              class="w-[200%] !bg-slate-700 max-w-none h-auto absolute top-0 scale-110 -translate-x-1/2 -translate-y-0 left-1/2 rounded-xl object-top origin-top object-cover" />
+            <NuxtImg v-if="true" quality="60" :alt="prjct.title"
+              placeholder-class="animate-pulse !w-full !h-full max-w-full" format="webp" loading="lazy" placeholder
+              sizes="550px, sm:700px" :src="`/compressed/${prjct.src}.png`"
+              class="w-full !bg-slate-700 max-w-none h-full absolute top-0 scale-110 -translate-x-1/2 -translate-y-0 left-1/2 rounded-xl object-top origin-top object-cover" />
           </div>
         </div>
       </template>
-
-      <!-- <div class="card xx-large">
-        <div
-          class="img__wrapper rounded-xl relative w-[90%] h-[90%] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden">
-          <NuxtImg src="/compressed/pexel.png"
-            class="w-[200%] max-w-none h-auto absolute top-0 -translate-x-1/2 -translate-y-0 left-1/2 rounded-xl object-center origin-center object-cover" />
-        </div>
-      </div>
-      <div class="card medium">
-
-      </div>
-      <div class="card large">
-
-      </div> -->
     </div>
   </section>
 </template>

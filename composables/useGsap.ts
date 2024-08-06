@@ -2,7 +2,8 @@ import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 gsap.registerPlugin(ScrollToPlugin)
 export const useGsap = () => {
-
+ const currentTabIndex = useState('tab-id', () => -3)
+ const isAnimate = useState('is-animate', () => false)
  const tl = gsap.timeline();
  const targets = {
   loader: "main#loader",
@@ -47,6 +48,7 @@ export const useGsap = () => {
    stagger: .05,
    ease: "expo.inOut", onComplete() {
     __showElementOnScroll__()
+    animateHeaderInicator()
    }
   }, "<")
  }
@@ -63,10 +65,94 @@ export const useGsap = () => {
   targets.forEach((target) => observer.observe(target))
 
  }
- const ________scrollTo_______ = ({ uTarget = 0 }: { uTarget: number }) => {
-  gsap.to(window, { scrollTo: uTarget, duration: 1, ease: "power4.inOut" })
+ const ________scrollTo_______ = ({ uTarget = 0 }: { uTarget: number | string }) => {
+  tl.to(window, { scrollTo: uTarget, duration: 1, ease: "power4.inOut" })
 
  }
- return { __pageTransitionEnter__, __showElementOnScroll__, _animateLandingContent_, ________scrollTo_______ }
+ const animateHeaderInicator = (activeTab?: any) => {
+  activeTab = activeTab ?? {}
+  if (!activeTab.target) {
+   activeTab.target = activeTab.target ?? document.querySelector("[data-index='0']")
+  }
+  // console.log(activeTab.target)
+  // if (true) return;
+  if (isAnimate.value) return;
+  isAnimate.value = true
+  const baseWidth = 48 // iconWidth && indicatorWidth
+  const baseDuration = 1
+  const baseEase = "expo.inOut"//"power4.inOut" //
+  const headerWrapper = document.querySelector("header#header .header__wrapper")
+  const target = activeTab?.target
+  const offsetLeft = target?.offsetLeft ?? 0
+  const offsetRight = -(4 - target.dataset.index) * 48
+  const nextTabIndex = activeTab.target.dataset.index
+  const isRightDirection = Number(nextTabIndex) - Number(currentTabIndex.value) >= 0
+  const isInitIndicator = Number(nextTabIndex) - Number(currentTabIndex.value) === 0
+  // const offsetObtion = { x: offsetLeft }
+
+  // if (nextTabIndex == currentTabIndex.value) return;
+
+  if (isRightDirection) {
+   const curretnOffsetLeft = currentTabIndex.value * 48
+   // if right direction
+   tl.set("#indicator", {
+    x: curretnOffsetLeft,
+    left: 0, right: 'auto'
+   })
+   tl.to("#indicator", {
+    width: baseWidth + (nextTabIndex - currentTabIndex.value) * baseWidth,
+    duration: baseDuration - 0.5,
+    ease: baseEase, onComplete() {
+     currentTabIndex.value = nextTabIndex
+    }
+   })
+   tl.to("#indicator", {
+    x: offsetLeft,
+    duration: baseDuration,
+    ease: baseEase
+   })
+   tl.to("#indicator", {
+    width: baseWidth,
+    duration: baseDuration,
+    ease: baseEase
+   }, "<")
+  } else {
+   // if left direction
+   const currentOffsetRight = -(4 - currentTabIndex.value) * 48
+   tl.set("#indicator", {
+    right: 0, left: 'auto',
+    x: currentOffsetRight
+   })
+   tl.to("#indicator", {
+    width: baseWidth + (currentTabIndex.value - nextTabIndex) * baseWidth,
+    duration: baseDuration - 0.5,
+    ease: baseEase, onComplete() {
+     currentTabIndex.value = nextTabIndex
+    }
+   })
+   tl.to("#indicator", {
+    x: offsetRight,
+    duration: baseDuration,
+    ease: baseEase
+   })
+   tl.to("#indicator", {
+    width: baseWidth,
+    duration: baseDuration,
+    ease: baseEase
+   }, "<")
+  }
+  const scrollTarget = "#" + activeTab.target.dataset.section
+  tl.to(window, {
+   scrollTo: scrollTarget, duration: baseDuration,
+   ease: baseEase
+  }, "<")
+
+  tl.call(() => {
+   isAnimate.value = false
+  })
+
+ }
+
+ return { __pageTransitionEnter__, __showElementOnScroll__, _animateLandingContent_, ________scrollTo_______, animateHeaderInicator }
 
 }
