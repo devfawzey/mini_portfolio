@@ -5,8 +5,8 @@ import { TIMELINE } from "~/constants"
 </script>
 
 <template>
- <section id='timeline' class='pb-12'>
-  <hr class="my-6 border-white/20" fade-scroll />
+ <section id='timeline' class='pb-12 min-h-screen'>
+  <hr class="mt-12 mb-6 border-white/20" fade-scroll />
   <div class="text-2xl mb-14 md:mb-4" fade-scroll>My Timeline</div>
   <div class="timeline_wrapper relative flex items-center md:justify-center">
    <ul class="relative md:w-1/2 h-full top-0 md:left-1/2 ms-4 md:ms-0 md:-translate-x-1/2">

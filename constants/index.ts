@@ -18,23 +18,14 @@ export const CONTACT = [
 ]
 export const PROJECTS = [
  {
-  "title": "Commerce-Hope",
-  "type": "ecommerce",
-  "grid": "xx-large",
+  title: "tabarak company",
+  type: "design",
+  grid: "xx-large",
   techs: ['mdi:nuxt'],
-  "tags": [
-   {
-    "title": "nuxt",
-    "color": "rgb(79 70 229)"
-   },
-   {
-    "title": "Ecommerce",
-    "color": "rgb(220 38 38)"
-   }
-  ],
-  "src": "commerce-hope",
-  "link": "https://commerce-hope.vercel.app/"
+  src: "tabark",
+  link: "https://tabrak-pi.vercel.app/"
  },
+
  {
   "title": "Innovate",
   "type": "design",
@@ -58,12 +49,22 @@ export const PROJECTS = [
   "link": "https://innovate3.online/"
  },
  {
-  title: "tabarak company",
-  type: "design",
-  grid: "xx-large",
+  "title": "Commerce-Hope",
+  "type": "ecommerce",
+  "grid": "xx-large",
   techs: ['mdi:nuxt'],
-  src: "tabark",
-  link: "https://tabrak-pi.vercel.app/"
+  "tags": [
+   {
+    "title": "nuxt",
+    "color": "rgb(79 70 229)"
+   },
+   {
+    "title": "Ecommerce",
+    "color": "rgb(220 38 38)"
+   }
+  ],
+  "src": "commerce-hope",
+  "link": "https://commerce-hope.vercel.app/"
  },
  {
   "title": "Hager UI-UX Developer",
@@ -256,7 +257,7 @@ export const TOOLS = [
 
 export const HEADERLINKS = [
  {
-  title: "home-page",
+  title: "landing",
   icon: 'bi:grid'
  },
  {

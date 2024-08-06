@@ -4,7 +4,7 @@ import { STACKS } from "~/constants"
 </script>
 
 <template>
- <section id='techs' class=''>
+ <section id='techs' class='min-h-screen'>
   <hr class="my-6 border-white/20" fade-scroll />
   <div class="text-2xl mb-4" fade-scroll>Techs</div>
   <div class="grid gap-3 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">

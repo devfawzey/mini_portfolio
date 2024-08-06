@@ -5,13 +5,13 @@ import { PROJECTS } from "~/constants"
 </script>
 
 <template>
-  <section id='projects' class=''>
+  <section id='projects' class='min-h-screen'>
     <hr class="my-6 border-white/20" fade-scroll />
     <div class="text-2xl mb-4" fade-scroll>Projects</div>
     <!--  -->
     <div class="grid_container">
       <template v-for="prjct in PROJECTS">
-        <div :class="[prjct.grid ?? 'medium']" class="card" fade-scroll>
+        <div v-if="prjct.show !== false" :class="[prjct.grid ?? 'medium']" class="card" fade-scroll>
           <div
             class="img__wrapper group rounded-xl relative w-[90%] h-[90%] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden">
             <!-- content -->

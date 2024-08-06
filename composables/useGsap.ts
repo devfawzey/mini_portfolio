@@ -48,7 +48,7 @@ export const useGsap = () => {
    stagger: .05,
    ease: "expo.inOut", onComplete() {
     __showElementOnScroll__()
-    animateHeaderInicator()
+    // animateHeaderInicator()
    }
   }, "<")
  }
@@ -69,12 +69,8 @@ export const useGsap = () => {
   tl.to(window, { scrollTo: uTarget, duration: 1, ease: "power4.inOut" })
 
  }
- const animateHeaderInicator = (activeTab?: any) => {
-  activeTab = activeTab ?? {}
-  if (!activeTab.target) {
-   activeTab.target = activeTab.target ?? document.querySelector("[data-index='0']")
-  }
-  // console.log(activeTab.target)
+ const animateHeaderInicator = (activeTab: string = 'home-page') => {
+  console.log('animate')
   // if (true) return;
   if (isAnimate.value) return;
   isAnimate.value = true
@@ -82,10 +78,10 @@ export const useGsap = () => {
   const baseDuration = 1
   const baseEase = "expo.inOut"//"power4.inOut" //
   const headerWrapper = document.querySelector("header#header .header__wrapper")
-  const target = activeTab?.target
+  const target = document.querySelector(`.head-icon[data-section='${activeTab}']`) as HTMLElement
   const offsetLeft = target?.offsetLeft ?? 0
-  const offsetRight = -(4 - target.dataset.index) * 48
-  const nextTabIndex = activeTab.target.dataset.index
+  const offsetRight = -(4 - Number(target.dataset.index)) * 48
+  const nextTabIndex = Number(target.dataset.index)
   const isRightDirection = Number(nextTabIndex) - Number(currentTabIndex.value) >= 0
   const isInitIndicator = Number(nextTabIndex) - Number(currentTabIndex.value) === 0
   // const offsetObtion = { x: offsetLeft }
@@ -141,7 +137,7 @@ export const useGsap = () => {
     ease: baseEase
    }, "<")
   }
-  const scrollTarget = "#" + activeTab.target.dataset.section
+  const scrollTarget = "#" + target.dataset.section
   tl.to(window, {
    scrollTo: scrollTarget, duration: baseDuration,
    ease: baseEase
@@ -153,6 +149,19 @@ export const useGsap = () => {
 
  }
 
- return { __pageTransitionEnter__, __showElementOnScroll__, _animateLandingContent_, ________scrollTo_______, animateHeaderInicator }
+ const changeIndicatorActiveTabOnScroll = (fn: (title: string) => void) => {
+  const targets: NodeListOf<HTMLElement> = document.querySelectorAll('section')
+  const observer = new IntersectionObserver(useDebounceFn((entries) => {
+   entries.forEach((entry: any) => {
+    if (!entry.isIntersecting) return;
+    console.log(entry.target.id)
+    fn(entry.target.id)
+   })
+  }, 250), { root: null, rootMargin: "0px", threshold: 0 })
+
+  targets.forEach((target) => observer.observe(target))
+ }
+
+ return { __pageTransitionEnter__, changeIndicatorActiveTabOnScroll, __showElementOnScroll__, _animateLandingContent_, ________scrollTo_______, animateHeaderInicator }
 
 }

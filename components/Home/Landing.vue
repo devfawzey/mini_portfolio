@@ -4,7 +4,11 @@ import { CONTACT } from "~/constants"
 </script>
 
 <template>
- <main id='landing'>
+ <section id='landing' class="min-h-screen pt-28">
+  <div class="shape flex items-center gap-4 mb-8" once-in>
+   <div class="bg-green-400 shadow shadow-green-400 w-2 h-2 rounded-full" />
+   <div class="text-sm">Online.</div>
+  </div>
   <div class="text-3xl sm:text-5xl mb-2 font-semibold" once-in>
    Hey, I'm Mohammed
   </div>
@@ -30,7 +34,7 @@ import { CONTACT } from "~/constants"
    technologies. talents, and areas of
    expertise
   </p>
- </main>
+ </section>
 </template>
 
 <style>
