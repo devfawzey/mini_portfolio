@@ -1,171 +1,48 @@
-import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"
-gsap.registerPlugin(ScrollToPlugin)
-export const useGsap = () => {
- const currentTabIndex = useState('tab-id', () => -3)
- const isAnimate = useState('is-animate', () => false)
- const tl = gsap.timeline();
- const targets = {
-  loader: "main#loader",
-  landingImg: ".bg-dots"
- }
+<script setup lang='ts'>
+import { HEADERLINKS } from "~/constants"
+const { animateHeaderInicator, changeIndicatorActiveTabOnScroll } = useGsap()
+const activeTab = ref('home-page') // index??
 
- const __pageTransitionEnter__ = () => {
-  /**
-   * sets
-   * loader -100
-   * img scale(1)
-   */
+onMounted(() => {
+  setTimeout(() => {
+    changeIndicatorActiveTabOnScroll((title) => { activeTab.value = title })
+  }, 1500)
+})
+watch(activeTab, (newValue) => {
+  animateHeaderInicator(newValue)
+})
+</script>
 
+<template>
+  <header id='header'
+    class='fixed z-10 lg:rotate-90 lg:left-0 lg:top-1/2 lg:-translate-x-1/3 lg:rotat-90 bottom-0 left-1/2 -translate-x-1/2 -translate-y-8 bg-gradient-to-r from-main to-main-foreground min-w-64 lg:h-max rounded-xl px-8'>
+    <!-- indicator -->
+    <div class="header__wrapper bg-gray-800 relative py-4 w-full h-full flex items-center justify-center">
+      <div id="indicator" v-if="true"
+        class="border-black border-[6px] absolute w-16 h-16 bg-gradient-to-r from-indigo-600 to-pink-600 translate-x-0 left-0 top-0 rounded-full -translate-y-1/2">
+        <span
+          class="absolute top-1/2 -left-[22px] w-5 aspect-square bg-transparent u-shadow rounded-tr-[20px]" />
+        <span
+          class="absolute top-1/2 -right-[22px] w-5 aspect-square bg-transparent u-shadow rounded-tl-[20px]" />
+      </div>
+      <!-- icons -->
+      <template v-for="(link, index) in HEADERLINKS">
+        <!-- <UTooltip text="hello wolrd" :popper="{ placement: 'right' }"> -->
+        <UIcon :data-section="link.title" :data-index="index" @click="activeTab = link.title" :name="link.icon"
+          :class="[link.title]" class="head-icon cursor-pointer inline-block text-2xl w-12 aspect-square lg:-rotate-90" />
+        <!-- </UTooltip> -->
+      </template>
+    </div>
+  </header>
+</template>
 
-  // sets
-  // tl.set(targets.landingImg, {
-  //  scale: 1.5,
-  //  rotate: 0.001,
-  // })
-  // loader
-  tl.to(targets.loader, { yPercent: -100, ease: "expo.inOut", duration: 1.75, delay: 0.5, })
-  // img
-  tl.to(targets.landingImg, {
-   scale: 1,
-   duration: 1.75,
-   ease: "expo.inOut"
-  }, "<")
-  _animateLandingContent_()
- }
- const __pageTransitionLeave__ = () => { }
- const ____zoomImgOnScroll____ = () => { }
- const _animateLandingContent_ = () => {
-  const target = "[once-in]"
-  // set first
-  // tl.set(target, {
-  //  y: '50vh'
-  // })
-  tl.to(target, {
-   y: "0vh",
-   // opacity: 1,
-   duration: 1.75,
-   stagger: .05,
-   ease: "expo.inOut", onComplete() {
-    __showElementOnScroll__()
-    animateHeaderInicator()
-   }
-  }, "<")
- }
- const __showElementOnScroll__ = () => {
-  const targets: NodeListOf<HTMLElement> = document.querySelectorAll('[fade-scroll]')
-
-  const observer = new IntersectionObserver((entries) => {
-   entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    entry.target.classList.add('appear')
-   })
-  }, { root: null, threshold: .1, rootMargin: "0px" })
-
-  targets.forEach((target) => observer.observe(target))
-
- }
- const ________scrollTo_______ = ({ uTarget = 0 }: { uTarget: number | string }) => {
-  tl.to(window, { scrollTo: uTarget, duration: 1, ease: "power4.inOut" })
-
- }
- const animateHeaderInicator = (activeTab?: any) => {
-  // activeTab = activeTab ?? {}
-  // if (!activeTab.target) {
-  //  activeTab.target = activeTab.target ?? document.querySelector("[data-index='0']")
-  // }
-  // console.log(activeTab.target)
-  // if (true) return;
-  if (isAnimate.value) return;
-  isAnimate.value = true
-  const baseWidth = 48 // iconWidth && indicatorWidth
-  const baseDuration = 1
-  const baseEase = "expo.inOut"//"power4.inOut" //
-  const headerWrapper = document.querySelector("header#header .header__wrapper")
-  const target = activeTab?.target
-  const offsetLeft = target?.offsetLeft ?? 0
-  const offsetRight = -(4 - target.dataset.index) * 48
-  const nextTabIndex = activeTab.target.dataset.index
-  const isRightDirection = Number(nextTabIndex) - Number(currentTabIndex.value) >= 0
-  const isInitIndicator = Number(nextTabIndex) - Number(currentTabIndex.value) === 0
-  // const offsetObtion = { x: offsetLeft }
-
-  // if (nextTabIndex == currentTabIndex.value) return;
-
-  if (isRightDirection) {
-   const curretnOffsetLeft = currentTabIndex.value * 48
-   // if right direction
-   tl.set("#indicator", {
-    x: curretnOffsetLeft,
-    left: 0, right: 'auto'
-   })
-   tl.to("#indicator", {
-    width: baseWidth + (nextTabIndex - currentTabIndex.value) * baseWidth,
-    duration: baseDuration - 0.5,
-    ease: baseEase, onComplete() {
-     currentTabIndex.value = nextTabIndex
-    }
-   })
-   tl.to("#indicator", {
-    x: offsetLeft,
-    duration: baseDuration,
-    ease: baseEase
-   })
-   tl.to("#indicator", {
-    width: baseWidth,
-    duration: baseDuration,
-    ease: baseEase
-   }, "<")
-  } else {
-   // if left direction
-   const currentOffsetRight = -(4 - currentTabIndex.value) * 48
-   tl.set("#indicator", {
-    right: 0, left: 'auto',
-    x: currentOffsetRight
-   })
-   tl.to("#indicator", {
-    width: baseWidth + (currentTabIndex.value - nextTabIndex) * baseWidth,
-    duration: baseDuration - 0.5,
-    ease: baseEase, onComplete() {
-     currentTabIndex.value = nextTabIndex
-    }
-   })
-   tl.to("#indicator", {
-    x: offsetRight,
-    duration: baseDuration,
-    ease: baseEase
-   })
-   tl.to("#indicator", {
-    width: baseWidth,
-    duration: baseDuration,
-    ease: baseEase
-   }, "<")
-  }
-  const scrollTarget = "#" + activeTab.target.dataset.section
-  tl.to(window, {
-   scrollTo: scrollTarget, duration: baseDuration,
-   ease: baseEase
-  }, "<")
-
-  tl.call(() => {
-   isAnimate.value = false
-  })
-
- }
-
- const changeIndicatorActiveTabOnScroll = (fn: () => void) => {
-  const targets: NodeListOf<HTMLElement> = document.querySelectorAll('section')
-  const observer = new IntersectionObserver((entries) => {
-   entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    console.log(entry.target)
-    fn()
-   })
-  }, { root: null, rootMargin: "0px", threshold: .1 })
-
-  targets.forEach((target) => observer.observe(target))
- }
-
- return { __pageTransitionEnter__, changeIndicatorActiveTabOnScroll, __showElementOnScroll__, _animateLandingContent_, ________scrollTo_______, animateHeaderInicator }
-
+<style scoped>
+.u-gradient {
+  background: rgb(63, 94, 251);
+  background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
 }
+
+.u-shadow {
+  box-shadow: 0px -10px 0 0 #000;
+}
+</style>

@@ -69,74 +69,111 @@ export const useGsap = () => {
   tl.to(window, { scrollTo: uTarget, duration: 1, ease: "power4.inOut" })
 
  }
- const animateHeaderInicator = (activeTab: string = 'home-page') => {
-  console.log('animate')
+ const animateHeaderInicator = (activeTab: string = 'home-page', isResize: boolean = false) => {
   // if (true) return;
   if (isAnimate.value) return;
   isAnimate.value = true
-  const baseWidth = 48 // iconWidth && indicatorWidth
+  const indicatorWidth = document.querySelector('#indicator')?.offsetWidth ?? 64
+  const iconWidth = document.querySelector('[data-section]')?.offsetWidth ?? 80
+  const indicatorDiff = (iconWidth - indicatorWidth) / 2
   const baseDuration = 1
   const baseEase = "expo.inOut"//"power4.inOut" //
-  const headerWrapper = document.querySelector("header#header .header__wrapper")
-  const target = document.querySelector(`.head-icon[data-section='${activeTab}']`) as HTMLElement
-  const offsetLeft = target?.offsetLeft ?? 0
-  const offsetRight = -(4 - Number(target.dataset.index)) * 48
+  const target = document.querySelector(`.head-link[data-section='${activeTab}']`) as HTMLElement
+  const offsetLeft = target?.offsetLeft ?? 0 + indicatorDiff * 2 //-8px + 48px* 4
+  const offsetRight = -(4 - Number(target.dataset.index)) * iconWidth
   const nextTabIndex = Number(target.dataset.index)
   const isRightDirection = Number(nextTabIndex) - Number(currentTabIndex.value) >= 0
   const isInitIndicator = Number(nextTabIndex) - Number(currentTabIndex.value) === 0
   // const offsetObtion = { x: offsetLeft }
 
   // if (nextTabIndex == currentTabIndex.value) return;
-
+  // transform: translate(0%, -50%) translate(calc(48px* 3 - 8px), 0px);
+  // width: calc(64px* 3 - 8px* 3);
+  if (isResize) {
+   tl.set("#indicator", {
+    left: 0, right: 'auto'
+   })
+   tl.to("#indicator", {
+    x: nextTabIndex * iconWidth + indicatorDiff,
+    duration: baseDuration,
+    ease: baseEase
+   })
+   isAnimate.value = false
+   return ''
+  }
   if (isRightDirection) {
-   const curretnOffsetLeft = currentTabIndex.value * 48
+   const curretnOffsetLeft = currentTabIndex.value * iconWidth + indicatorDiff
    // if right direction
    tl.set("#indicator", {
     x: curretnOffsetLeft,
     left: 0, right: 'auto'
    })
    tl.to("#indicator", {
-    width: baseWidth + (nextTabIndex - currentTabIndex.value) * baseWidth,
+    width: indicatorWidth + (nextTabIndex - currentTabIndex.value) * indicatorWidth + indicatorDiff * 2 * (nextTabIndex - currentTabIndex.value),
     duration: baseDuration - 0.5,
     ease: baseEase, onComplete() {
      currentTabIndex.value = nextTabIndex
     }
    })
    tl.to("#indicator", {
-    x: offsetLeft,
+    x: nextTabIndex * iconWidth + indicatorDiff,
     duration: baseDuration,
     ease: baseEase
    })
    tl.to("#indicator", {
-    width: baseWidth,
+    width: indicatorWidth,
     duration: baseDuration,
     ease: baseEase
    }, "<")
   } else {
    // if left direction
-   const currentOffsetRight = -(4 - currentTabIndex.value) * 48
+   const currentOffsetRight = -(4 - currentTabIndex.value) * iconWidth - indicatorDiff
    tl.set("#indicator", {
     right: 0, left: 'auto',
     x: currentOffsetRight
    })
    tl.to("#indicator", {
-    width: baseWidth + (currentTabIndex.value - nextTabIndex) * baseWidth,
+    width: indicatorWidth + (currentTabIndex.value - nextTabIndex) * indicatorWidth + indicatorDiff * 2 * (currentTabIndex.value - nextTabIndex),
     duration: baseDuration - 0.5,
     ease: baseEase, onComplete() {
      currentTabIndex.value = nextTabIndex
     }
    })
    tl.to("#indicator", {
-    x: offsetRight,
+    x: nextTabIndex * iconWidth - indicatorDiff - iconWidth * 4,
     duration: baseDuration,
     ease: baseEase
    })
    tl.to("#indicator", {
-    width: baseWidth,
+    width: indicatorWidth,
     duration: baseDuration,
     ease: baseEase
    }, "<")
   }
+  tl.to(`[data-section] .head-text`, {
+   opacity: 0,
+   yPercent: 100,
+   duration: baseDuration,
+   ease: baseEase
+  }, "<")
+  tl.to(`[data-section] .head-icon`, {
+   y: 0,
+   color:'white',
+   duration: baseDuration,
+   ease: baseEase
+  }, "<")
+  tl.to(`[data-section='${activeTab}'] .head-icon`, {
+   y: -52,
+   color:'black',
+   duration: baseDuration,
+   ease: baseEase
+  }, "<")
+  tl.to(`[data-section='${activeTab}'] .head-text`, {
+   opacity: 1,
+   yPercent: -50,
+   duration: baseDuration,
+   ease: baseEase
+  }, "<")
   const scrollTarget = "#" + target.dataset.section
   tl.to(window, {
    scrollTo: scrollTarget, duration: baseDuration,
@@ -154,7 +191,6 @@ export const useGsap = () => {
   const observer = new IntersectionObserver(useDebounceFn((entries) => {
    entries.forEach((entry: any) => {
     if (!entry.isIntersecting) return;
-    console.log(entry.target.id)
     fn(entry.target.id)
    })
   }, 250), { root: null, rootMargin: "0px", threshold: 0 })

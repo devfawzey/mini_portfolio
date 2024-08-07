@@ -257,8 +257,8 @@ export const TOOLS = [
 
 export const HEADERLINKS = [
  {
-  title: "landing",
-  icon: 'bi:grid'
+  title: "profile",
+  icon: 'iconamoon:profile-thin'
  },
  {
   title: "timeline",

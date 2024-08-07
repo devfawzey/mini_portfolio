@@ -4,8 +4,8 @@ import { CONTACT } from "~/constants"
 </script>
 
 <template>
- <section id='landing' class="min-h-screen pt-28">
-  <div class="shape flex items-center gap-4 mb-8" once-in>
+ <section id='profile' class="min-h-screen pt-28">
+  <div class="shape flex items-center gap-3 mb-8" once-in>
    <div class="bg-green-400 shadow shadow-green-400 w-2 h-2 rounded-full" />
    <div class="text-sm">Online.</div>
   </div>
