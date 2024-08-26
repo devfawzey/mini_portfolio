@@ -1,4 +1,5 @@
-export const CONTACT = [
+import { type Contact, type Stack, type Tool } from "@/types.js"
+export const CONTACT: Contact[] = [
  {
   title: "linkedin",
   icon: "mdi:linkedin",
@@ -51,6 +52,7 @@ export const PROJECTS = [
  {
   "title": "Commerce-Hope",
   "type": "ecommerce",
+  show: false,
   "grid": "xx-large",
   techs: ['mdi:nuxt'],
   "tags": [
@@ -86,6 +88,7 @@ export const PROJECTS = [
  },
  {
   "title": "Movies Hunter",
+  show: false,
   "type": "design",
   "grid": "xx-large",
   techs: ['mdi:vuejs'],
@@ -100,6 +103,7 @@ export const PROJECTS = [
  },
  {
   "title": ".Store",
+  show: false,
   "type": "ecommerce",
   techs: ['mdi:nuxt'],
   "tags": [
@@ -135,6 +139,7 @@ export const PROJECTS = [
  },
  {
   "title": "Pexels eCommerce",
+  show: false,
   "type": "ecommerce",
   "made_with": "Nuxtjs",
   techs: ['mdi:nuxt'],
@@ -180,7 +185,7 @@ export const PROJECTS = [
  },
 ]
 
-export const STACKS = [
+export const STACKS: Stack[] = [
  {
   title: "vue",
   icon: "mdi:vuejs"
@@ -228,7 +233,7 @@ export const STACKS = [
  // },
 ]
 
-export const TOOLS = [
+export const TOOLS: Tool[] = [
  {
   title: "vscode",
   icon: "mdi:microsoft-visual-studio-code"
